@@ -31,6 +31,14 @@ import (
 
 var _ = Describe("kube-dns", func() {
 
+	BeforeEach(func() {
+		os.Setenv("KUBE_FEATURE_WatchListClient", "false")
+	})
+
+	AfterEach(func() {
+		os.Unsetenv("KUBE_FEATURE_WatchListClient")
+	})
+
 	Context("basic functionality", func() {
 		kubeDNS := &e2edns.KubeDNS{}
 		It("should start", func() {
